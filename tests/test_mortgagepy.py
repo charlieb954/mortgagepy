@@ -18,19 +18,16 @@ def test_monthly_interest():
 
 
 def test_ltv_calculator():
-    assert mortgagepy.ltv_calculator(200_000, 50_000) == {"ltv_pct": 75}
+    assert mortgagepy.ltv_calculator(200_000, 50_000) == 75
 
 
 def test_interest_only_calculator():
-    assert mortgagepy.interest_only_calculator(130_500, 3.89) == {
-        "monthly_repayment": 423.04
-    }
+    assert mortgagepy.interest_only_calculator(130_500, 3.89) == 423.04
 
 
 def test_repayment_calculator():
-    assert mortgagepy.repayment_calculator(130_500, 3.89, 300) == {
-        "monthly_repayment": 680.93
-    }
-    assert mortgagepy.repayment_calculator(130_500, 6.89, 300) == {
-        "monthly_repayment": 913.21
-    }
+    assert mortgagepy.repayment_calculator(130_500, 3.89, 300) == 680.93
+    assert mortgagepy.repayment_calculator(130_500, 6.89, 300) == 913.21
+
+def test_total_cost_of_mortgage():
+    assert mortgagepy.total_cost_of_mortgage(130_500, 6.89, 300) == 273_963.0
