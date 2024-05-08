@@ -13,11 +13,12 @@
 913.21
 >>> mortgagepy.total_cost_of_mortgage(mortgage=130_500, interest_rate=6.89, mortgage_length_months=300)
 273_963.0
->>> mortgagepy.test_interest_only_calculator(mortgage=130_500, interest_rate=3.89)
+>>> mortgagepy.interest_only_calculator(mortgage=130_500, interest_rate=3.89)
 423.04
 >>> mortgagepy.ltv_calculator(property_price=200_000, deposit=50_000)
 75
 >>> mortgagepy.monthly_interest(balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023)
 -158.70
+>>> mortgagepy.compare_repayment_interest_rates(mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300)
+{1: 491.82, 2: 553.13}
 ```
-
