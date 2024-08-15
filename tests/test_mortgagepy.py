@@ -1,5 +1,4 @@
 import pytest
-
 from mortgagepy import (
     IncorrectType,
     compare_repayment_interest_rates,
@@ -22,14 +21,8 @@ def test_monthly_interest() -> None:
     october_balance = -98_868.70
     september_balance = -99_276.93
 
-    assert (
-        monthly_interest(september_balance, 1.89, 9, 2023)
-        == october_debit_interest
-    )
-    assert (
-        monthly_interest(october_balance, 1.89, 10, 2023)
-        == november_debit_interest
-    )
+    assert monthly_interest(september_balance, 1.89, 9, 2023) == october_debit_interest
+    assert monthly_interest(october_balance, 1.89, 10, 2023) == november_debit_interest
 
 
 def test_ltv_calculator(mortgage: int) -> None:
