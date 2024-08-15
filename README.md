@@ -31,7 +31,7 @@ pip install .'[dev]' # for mac
 273_963.0
 >>> interest_only_calculator(mortgage=130_500, interest_rate=3.89)
 423.04
->>> ltv_calculator(property_price=200_000, deposit=50_000)
+>>> ltv_calculator(property_value=200_000, deposit=50_000)
 75
 >>> monthly_interest(balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023)
 -158.70
