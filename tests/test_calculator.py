@@ -1,6 +1,5 @@
 import pytest
 from mortgagepy.calculator import (
-    IncorrectType,
     compare_repayment_interest_rates,
     interest_only_calculator,
     ltv_calculator,
@@ -8,6 +7,7 @@ from mortgagepy.calculator import (
     repayment_calculator,
     total_cost_of_mortgage,
 )
+from mortgagepy.exceptions import IncorrectType
 
 
 @pytest.fixture

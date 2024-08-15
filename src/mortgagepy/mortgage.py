@@ -102,3 +102,10 @@ class InterestOnlyMortgage(MortgageBase):
         return interest_only_calculator(
             mortgage=self.mortgage, interest_rate=self.interest_rate
         )
+    
+    @cache
+    def mortgage_total_cost(self) -> float:
+        monthly_repayment = interest_only_calculator(
+            mortgage=self.mortgage, interest_rate=self.interest_rate
+        )
+        return monthly_repayment * self.term_months
