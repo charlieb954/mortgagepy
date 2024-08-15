@@ -1,5 +1,5 @@
 import pytest
-from mortgagepy import (
+from mortgagepy.calculator import (
     IncorrectType,
     compare_repayment_interest_rates,
     interest_only_calculator,
