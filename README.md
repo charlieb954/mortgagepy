@@ -44,8 +44,8 @@ pip install .'[dev]' # for mac
 >>> from mortgagepy import CapitalRepaymentMortgage
 
 >>> my_mortgage = CapitalRepaymentMortgage(280000, 210000, 300, 1.8)
->>> m.monthly_repayment()
+>>> my_mortgage.monthly_repayment()
 869.79
->>> m.ltv()
+>>> my_mortgage.ltv()
 75
 ```
