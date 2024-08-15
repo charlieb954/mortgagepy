@@ -1,24 +1,51 @@
 # mortgagepy
 
-<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a> 
-
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 **mortgagepy** is a python library used to work out common mortgage calculations including captial repayments, total cost of ownership and single month interest.
 
-## Examples
+## Installation
+
+To use this library, currently you will need to git clone it and install using the following command:
+
+```bash
+pip install .
+pip install .[dev] # to include the developer dependencies
+pip install .'[dev]' # for mac
+```
+
+## Examples - calculator
 
 ```python
->>> import mortgagepy
->>> mortgagepy.repayment_calculator(mortgage=130_500, interest_rate=6.89, mortgage_length_months=300)
+>>> from mortgagepy.calculator import (
+    repayment_calcuatlor,
+    total_cost_of_mortgage,
+    interest_only_calculator,
+    ltv_calculator,
+    monthly_interest,
+    compare_repayment_interest_rates
+)
+>>> repayment_calculator(mortgage=130_500, interest_rate=6.89, mortgage_length_months=300)
 913.21
->>> mortgagepy.total_cost_of_mortgage(mortgage=130_500, interest_rate=6.89, mortgage_length_months=300)
+>>> total_cost_of_mortgage(mortgage=130_500, interest_rate=6.89, mortgage_length_months=300)
 273_963.0
->>> mortgagepy.interest_only_calculator(mortgage=130_500, interest_rate=3.89)
+>>> interest_only_calculator(mortgage=130_500, interest_rate=3.89)
 423.04
->>> mortgagepy.ltv_calculator(property_price=200_000, deposit=50_000)
+>>> ltv_calculator(property_price=200_000, deposit=50_000)
 75
->>> mortgagepy.monthly_interest(balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023)
+>>> monthly_interest(balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023)
 -158.70
->>> mortgagepy.compare_repayment_interest_rates(mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300)
+>>> compare_repayment_interest_rates(mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300)
 {1: 491.82, 2: 553.13}
+```
+
+## Examples - mortgage
+```python
+>>> from mortgagepy import CapitalRepaymentMortgage
+
+>>> my_mortgage = CapitalRepaymentMortgage(280000, 210000, 300, 1.8)
+>>> m.monthly_repayment()
+869.79
+>>> m.ltv()
+75
 ```
