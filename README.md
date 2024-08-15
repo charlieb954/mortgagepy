@@ -18,7 +18,7 @@ pip install .'[dev]' # for mac
 
 ```python
 >>> from mortgagepy.calculator import (
-    repayment_calcuatlor,
+    repayment_calculator,
     total_cost_of_mortgage,
     interest_only_calculator,
     ltv_calculator,
