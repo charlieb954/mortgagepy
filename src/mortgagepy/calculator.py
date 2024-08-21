@@ -1,17 +1,12 @@
 from calendar import isleap, monthrange
-from datetime import datetime
-from typing import Optional
-
-from dateutil import relativedelta
 
 from .exceptions import IncorrectType
 
 
-def repayment_calculator(
+def capital_repayment_calculator(
     mortgage: float,
     interest_rate: float,
-    mortgage_length_months: Optional[int] = None,
-    mortgage_length_years: Optional[int] = None,
+    mortgage_length_months: int,
 ) -> float:
     """A calculator to work out monthly mortgage repayments for a capital
     repayment mortgage. At least one of mortgage_length_months or
@@ -28,16 +23,12 @@ def repayment_calculator(
     Args:
         mortgage (float): outstanding mortgage value.
         interest_rate (float): current interest rate as a decimal.
-        mortgage_length_months (int, optional): number of months remaining of
-            the mortgage. Defaults to None.
-        mortgage_length_years (int, optional): number of years remaining of
-            the mortgage. Defaults to None.
+        mortgage_length_months (int): number of months remaining of
+            the mortgage.
 
     Returns:
         monthly_mortgage_repayment (float): monthly mortgage repayment.
     """
-    if mortgage_length_months is None and mortgage_length_years is not None:
-        mortgage_length_months = mortgage_length_years * 12
 
     r = (interest_rate / 100) / 12
     rate = (1 + r) ** mortgage_length_months
@@ -49,8 +40,7 @@ def repayment_calculator(
 def total_cost_of_mortgage(
     mortgage: float,
     interest_rate: float,
-    mortgage_length_months: Optional[int] = None,
-    mortgage_length_years: Optional[int] = None,
+    mortgage_length_months: int,
 ) -> float:
     """Works out the total cost of the mortgage assuming that the interest rate
     stays the same. At least one of mortgage_length_months or
@@ -59,18 +49,14 @@ def total_cost_of_mortgage(
     Args:
         mortgage (float): outstanding mortgage value.
         interest_rate (float): current interest rate as a decimal.
-        mortgage_length_months (int, optional): number of months remaining of
-            the mortgage. Defaults to None.
-        mortgage_length_years (int, optional): number of years remaining of
-            the mortgage. Defaults to None.
+        mortgage_length_months (int): number of months remaining of
+            the mortgage.
 
     Returns:
         total_cost (float): total cost of the mortgage.
     """
-    if mortgage_length_months is None:
-        mortgage_length_months = mortgage_length_years * 12
 
-    monthly_repayment = repayment_calculator(
+    monthly_repayment = capital_repayment_calculator(
         mortgage, interest_rate, mortgage_length_months
     )
 
@@ -79,7 +65,7 @@ def total_cost_of_mortgage(
     return total_cost
 
 
-def interest_only_calculator(mortgage: float, interest_rate: float) -> float:
+def interest_only_repayment_calculator(mortgage: float, interest_rate: float) -> float:
     """A calculator to work out monthly mortgage repayments of an interest only
     mortgage.
 
@@ -94,19 +80,6 @@ def interest_only_calculator(mortgage: float, interest_rate: float) -> float:
     monthly_interest_only_repayment = round((mortgage * interest_rate_dec) / 12, 2)
 
     return monthly_interest_only_repayment
-
-
-def mortgage_term_remaining(start_date: datetime, end_date: datetime) -> relativedelta:
-    """Given two dates, work out the difference in years, months and days.
-
-    Args:
-        start_date (datetime): start date for the calculation.
-        end_date (datetime): end date for the calculation.
-
-    Returns:
-        (relativedelta): absolute difference in years, months and days.
-    """
-    return abs(relativedelta.relativedelta(start_date, end_date))
 
 
 def ltv_calculator(property_value: float, deposit: float) -> int:
@@ -157,26 +130,16 @@ def monthly_interest(
     return monthly_interest
 
 
-def compare_interest_only_interest_rates():
-    pass
-
-
-def compare_repayment_interest_rates(
+def compare_interest_only_rates(
     mortgage: float,
     interest_rates: list,
-    mortgage_length_months: Optional[int] = None,
-    mortgage_length_years: Optional[int] = None,
 ) -> dict:
     """Compare multiple interest rates with the same mortgage to see how
-    the interest rate changes the repayments.
+    the interest rate changes the repayments for an interest only mortgage.
 
     Args:
         mortgage (float): outstanding mortgage value.
         interest_rates (list): interest rates to compare.
-        mortgage_length_months (int, optional): number of months remaining of
-            the mortgage. Defaults to None.
-        mortgage_length_years (int, optional): number of years remaining of
-            the mortgage. Defaults to None.
 
     Returns:
         (dict): all the interest rate and monthly repayment values.
@@ -187,11 +150,40 @@ def compare_repayment_interest_rates(
     repayments = dict()
 
     for interest_rate in interest_rates:
-        repayments[interest_rate] = repayment_calculator(
+        repayments[interest_rate] = interest_only_repayment_calculator(
+            mortgage=mortgage, interest_rate=interest_rate
+        )
+
+    return repayments
+
+
+def compare_capital_repayment_rates(
+    mortgage: float,
+    interest_rates: list,
+    mortgage_length_months: int,
+) -> dict:
+    """Compare multiple interest rates with the same mortgage to see how
+    the interest rate changes the repayments for a capital repayment mortgagae.
+
+    Args:
+        mortgage (float): outstanding mortgage value.
+        interest_rates (list): interest rates to compare.
+        mortgage_length_months (int): number of months remaining of
+            the mortgage.
+
+    Returns:
+        (dict): all the interest rate and monthly repayment values.
+    """
+    if not isinstance(interest_rates, list):
+        raise IncorrectType("Please ensure you pass a list of interest rates.")
+
+    repayments = dict()
+
+    for interest_rate in interest_rates:
+        repayments[interest_rate] = capital_repayment_calculator(
             mortgage=mortgage,
             interest_rate=interest_rate,
             mortgage_length_months=mortgage_length_months,
-            mortgage_length_years=mortgage_length_years,
         )
 
     return repayments
