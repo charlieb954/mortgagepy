@@ -25,17 +25,29 @@ pip install .'[dev]' # for mac
     monthly_interest,
     compare_repayment_interest_rates
 )
->>> repayment_calculator(mortgage=130_500, interest_rate=6.89, mortgage_length_months=300)
+>>> repayment_calculator(
+        mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
+    )
 913.21
->>> total_cost_of_mortgage(mortgage=130_500, interest_rate=6.89, mortgage_length_months=300)
+>>> total_cost_of_mortgage(
+        mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
+    )
 273_963.0
->>> interest_only_calculator(mortgage=130_500, interest_rate=3.89)
+>>> interest_only_calculator(
+        mortgage=130_500, interest_rate=3.89
+    )
 423.04
->>> ltv_calculator(property_value=200_000, deposit=50_000)
+>>> ltv_calculator(
+        property_value=200_000, deposit=50_000
+    )
 75
->>> monthly_interest(balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023)
+>>> monthly_interest(
+        balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023
+    )
 -158.70
->>> compare_repayment_interest_rates(mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300)
+>>> compare_repayment_interest_rates(
+        mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300
+    )
 {1: 491.82, 2: 553.13}
 ```
 
@@ -43,7 +55,9 @@ pip install .'[dev]' # for mac
 ```python
 >>> from mortgagepy import CapitalRepaymentMortgage
 
->>> my_mortgage = CapitalRepaymentMortgage(280000, 210000, 300, 1.8)
+>>> my_mortgage = CapitalRepaymentMortgage(
+        property_value=280000, mortgage=210000, term_months=300, interest_rate=1.8
+    )
 >>> my_mortgage.monthly_repayment()
 869.79
 >>> my_mortgage.ltv()
