@@ -1,5 +1,4 @@
-from . import calculator
-from . import exceptions
+from . import calculator, exceptions, utils
 from .mortgage import CapitalRepaymentMortgage, InterestOnlyMortgage, MortgageBase
 
 __all__ = [
@@ -8,5 +7,6 @@ __all__ = [
     "InterestOnlyMortgage",
     "MortgageBase",
     "calculator",
-    "exceptions"
+    "exceptions",
+    "utils",
 ]
