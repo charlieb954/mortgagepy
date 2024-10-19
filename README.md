@@ -14,6 +14,12 @@ pip install .[dev] # to include the developer dependencies
 pip install .'[dev]' # for mac
 ```
 
+Alternatively, it can be installed without cloning directly from this GitHub page using the following command:
+
+```bash
+pip install git+https://github.com/charlieb954/mortgagepy.git
+```
+
 ## Examples - calculator
 
 ```python
