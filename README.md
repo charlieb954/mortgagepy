@@ -14,6 +14,7 @@ the following command:
 ```bash
 pip install uv
 uv venv
+. .venv/bin/activate
 uv pip install .[dev] # to include the developer dependencies
 uv pip install .'[dev]' # for mac
 ```
