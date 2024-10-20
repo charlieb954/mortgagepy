@@ -27,35 +27,55 @@ pip install git+https://github.com/charlieb954/mortgagepy.git
 
 ## Examples - calculator
 
-```python
->>> from mortgagepy.calculator import (
-    monthly_capital_repayment,
-    total_cost_of_mortgage,
-    interest_only,
-    ltv,
-    monthly_interest,
-    compare_repayment_interest_rates
-)
+Calculate the monthly repayment for a capital payment mortgage.
+```python3
+>>> from mortgagepy.calculator import monthly_capital_repayment
 >>> monthly_capital_repayment(
         mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
     )
 913.21
+```
+
+Work out the total cost of a mortgage.
+```python3
+>>> from mortgagepy.calculator import total_cost_of_mortgage
 >>> total_cost_of_mortgage(
         mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
     )
 273_963.0
+```
+
+Calculate repayments for an interest only mortgage.
+```python3
+>>> from mortgagepy.calculator import monthly_interest_only
 >>> monthly_interest_only(
         mortgage=130_500, interest_rate=3.89
     )
 423.04
+```
+
+Calculate the loan-to-value as a percentage given a deposit and property value.
+```python3
+>>> from mortgagepy.calculator import ltv
 >>> ltv(
         property_value=200_000, deposit=50_000
     )
 75
+```
+
+Calculate the monthly interest to be paid on a mortgage.
+```python3
+>>> from mortgagepy.calculator import monthly_interest
+
 >>> monthly_interest(
         balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023
     )
 -158.70
+```
+
+Compare the cost of two interest rates.
+```python
+>>> from mortgagepy.calculator import compare_repayment_interest_rates
 >>> compare_repayment_interest_rates(
         mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300
     )
@@ -63,6 +83,9 @@ pip install git+https://github.com/charlieb954/mortgagepy.git
 ```
 
 ## Examples - mortgage
+
+Create a mortgage object and get important information such as loan-to-value and
+monthly repayments.
 ```python
 >>> from mortgagepy import CapitalRepaymentMortgage
 
