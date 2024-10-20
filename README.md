@@ -1,20 +1,25 @@
 # mortgagepy
 
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
-**mortgagepy** is a python library used to work out common mortgage calculations including captial repayments, total cost of ownership and single month interest.
+**mortgagepy** is a python library used to work out common mortgage calculations
+including captial repayments, total cost of ownership and single month interest.
 
 ## Installation
 
-To use this library, currently you will need to git clone it and install using the following command:
+To use this library, currently you will need to git clone it and install using
+the following command:
 
 ```bash
-pip install .
-pip install .[dev] # to include the developer dependencies
-pip install .'[dev]' # for mac
+pip install uv
+uv venv
+uv pip install .[dev] # to include the developer dependencies
+uv pip install .'[dev]' # for mac
 ```
 
-Alternatively, it can be installed without cloning directly from this GitHub page using the following command:
+Alternatively, it can be installed without cloning directly from this GitHub
+page using the following command:
 
 ```bash
 pip install git+https://github.com/charlieb954/mortgagepy.git
@@ -24,14 +29,14 @@ pip install git+https://github.com/charlieb954/mortgagepy.git
 
 ```python
 >>> from mortgagepy.calculator import (
-    repayment_calculator,
+    monthly_capital_repayment,
     total_cost_of_mortgage,
-    interest_only_calculator,
-    ltv_calculator,
+    interest_only,
+    ltv,
     monthly_interest,
     compare_repayment_interest_rates
 )
->>> repayment_calculator(
+>>> monthly_capital_repayment(
         mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
     )
 913.21
@@ -39,11 +44,11 @@ pip install git+https://github.com/charlieb954/mortgagepy.git
         mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
     )
 273_963.0
->>> interest_only_calculator(
+>>> monthly_interest_only(
         mortgage=130_500, interest_rate=3.89
     )
 423.04
->>> ltv_calculator(
+>>> ltv(
         property_value=200_000, deposit=50_000
     )
 75
