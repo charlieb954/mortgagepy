@@ -3,7 +3,7 @@ from calendar import isleap, monthrange
 from .exceptions import IncorrectType
 
 
-def capital_repayment_calculator(
+def monthly_capital_repayment(
     mortgage: float,
     interest_rate: float,
     mortgage_length_months: int,
@@ -56,7 +56,7 @@ def total_cost_of_mortgage(
         total_cost (float): total cost of the mortgage.
     """
 
-    monthly_repayment = capital_repayment_calculator(
+    monthly_repayment = monthly_capital_repayment(
         mortgage, interest_rate, mortgage_length_months
     )
 
@@ -65,7 +65,7 @@ def total_cost_of_mortgage(
     return total_cost
 
 
-def interest_only_repayment_calculator(mortgage: float, interest_rate: float) -> float:
+def monthly_interest_only_repayment(mortgage: float, interest_rate: float) -> float:
     """A calculator to work out monthly mortgage repayments of an interest only
     mortgage.
 
@@ -82,7 +82,7 @@ def interest_only_repayment_calculator(mortgage: float, interest_rate: float) ->
     return monthly_interest_only_repayment
 
 
-def ltv_calculator(property_value: float, deposit: float) -> int:
+def ltv(property_value: float, deposit: float) -> int:
     """Loan to value percentage calculator.
 
     Args:
@@ -150,7 +150,7 @@ def compare_interest_only_rates(
     repayments = dict()
 
     for interest_rate in interest_rates:
-        repayments[interest_rate] = interest_only_repayment_calculator(
+        repayments[interest_rate] = monthly_interest_only_repayment(
             mortgage=mortgage, interest_rate=interest_rate
         )
 
@@ -180,7 +180,7 @@ def compare_capital_repayment_rates(
     repayments = dict()
 
     for interest_rate in interest_rates:
-        repayments[interest_rate] = capital_repayment_calculator(
+        repayments[interest_rate] = monthly_capital_repayment(
             mortgage=mortgage,
             interest_rate=interest_rate,
             mortgage_length_months=mortgage_length_months,

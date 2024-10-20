@@ -1,9 +1,9 @@
 from functools import cache
 
 from .calculator import (
-    capital_repayment_calculator,
-    interest_only_repayment_calculator,
-    ltv_calculator,
+    ltv,
+    monthly_capital_repayment,
+    monthly_interest_only_repayment,
     total_cost_of_mortgage,
 )
 from .exceptions import IncorrectType
@@ -75,13 +75,13 @@ class MortgageBase:
     @cache
     def ltv(self) -> int:
         deposit = self.property_value - self.mortgage
-        return ltv_calculator(property_value=self.property_value, deposit=deposit)
+        return ltv(property_value=self.property_value, deposit=deposit)
 
 
 class CapitalRepaymentMortgage(MortgageBase):
     @cache
     def monthly_repayment(self) -> float:
-        return capital_repayment_calculator(
+        return monthly_capital_repayment(
             mortgage=self.mortgage,
             interest_rate=self.interest_rate,
             mortgage_length_months=self.term_months,
@@ -99,13 +99,13 @@ class CapitalRepaymentMortgage(MortgageBase):
 class InterestOnlyMortgage(MortgageBase):
     @cache
     def monthly_repayment(self) -> float:
-        return interest_only_repayment_calculator(
+        return monthly_interest_only_repayment(
             mortgage=self.mortgage, interest_rate=self.interest_rate
         )
 
     @cache
     def mortgage_total_cost(self) -> float:
-        monthly_repayment = interest_only_repayment_calculator(
+        monthly_repayment = monthly_interest_only_repayment(
             mortgage=self.mortgage, interest_rate=self.interest_rate
         )
         return monthly_repayment * self.term_months

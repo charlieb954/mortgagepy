@@ -1,12 +1,12 @@
 import pytest
 
 from mortgagepy.calculator import (
-    capital_repayment_calculator,
     compare_capital_repayment_rates,
     compare_interest_only_rates,
-    interest_only_repayment_calculator,
-    ltv_calculator,
+    ltv,
+    monthly_capital_repayment,
     monthly_interest,
+    monthly_interest_only_repayment,
     total_cost_of_mortgage,
 )
 from mortgagepy.exceptions import IncorrectType
@@ -44,25 +44,24 @@ def test_monthly_interest() -> None:
 
 
 def test_ltv_calculator() -> None:
-    assert ltv_calculator(property_value=100_000, deposit=50_000) == 50
+    assert ltv(property_value=100_000, deposit=50_000) == 50
 
 
 def test_interest_only_calculator(mortgage: int) -> None:
     assert (
-        interest_only_repayment_calculator(mortgage=mortgage, interest_rate=3.89)
-        == 423.04
+        monthly_interest_only_repayment(mortgage=mortgage, interest_rate=3.89) == 423.04
     )
 
 
 def test_repayment_calculator(mortgage: int) -> None:
     assert (
-        capital_repayment_calculator(
+        monthly_capital_repayment(
             mortgage=mortgage, interest_rate=3.89, mortgage_length_months=300
         )
         == 680.93
     )
     assert (
-        capital_repayment_calculator(
+        monthly_capital_repayment(
             mortgage=mortgage, interest_rate=6.89, mortgage_length_months=300
         )
         == 913.21
