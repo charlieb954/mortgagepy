@@ -29,7 +29,7 @@ pip install git+https://github.com/charlieb954/mortgagepy.git
 ## Examples - calculator
 
 Calculate the monthly repayment for a capital payment mortgage.
-```python3
+```python
 >>> from mortgagepy.calculator import monthly_capital_repayment
 >>> monthly_capital_repayment(
         mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
@@ -38,7 +38,7 @@ Calculate the monthly repayment for a capital payment mortgage.
 ```
 
 Work out the total cost of a mortgage.
-```python3
+```python
 >>> from mortgagepy.calculator import total_cost_of_mortgage
 >>> total_cost_of_mortgage(
         mortgage=130_500, interest_rate=6.89, mortgage_length_months=300
@@ -47,7 +47,7 @@ Work out the total cost of a mortgage.
 ```
 
 Calculate repayments for an interest only mortgage.
-```python3
+```python
 >>> from mortgagepy.calculator import monthly_interest_only
 >>> monthly_interest_only(
         mortgage=130_500, interest_rate=3.89
@@ -56,7 +56,7 @@ Calculate repayments for an interest only mortgage.
 ```
 
 Calculate the loan-to-value as a percentage given a deposit and property value.
-```python3
+```python
 >>> from mortgagepy.calculator import ltv
 >>> ltv(
         property_value=200_000, deposit=50_000
@@ -65,22 +65,33 @@ Calculate the loan-to-value as a percentage given a deposit and property value.
 ```
 
 Calculate the monthly interest to be paid on a mortgage.
-```python3
+```python
 >>> from mortgagepy.calculator import monthly_interest
 
 >>> monthly_interest(
-        balance_at_previous_month=-98_868.70, interest_rate=1.89, month=10, year=2023
+        balance_at_previous_month=98_868.70, interest_rate=1.89, month=10, year=2023
     )
--158.70
+158.7
 ```
 
-Compare the cost of two interest rates.
+## Examples - compare
+
+Compare the cost of two interest rates for a capital repayment mortgage.
 ```python
->>> from mortgagepy.calculator import compare_repayment_interest_rates
+>>> from mortgagepy.compare import compare_repayment_interest_rates
 >>> compare_repayment_interest_rates(
         mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300
     )
 {1: 491.82, 2: 553.13}
+```
+
+Compare the cost of two interest rates for an interest only mortgage.
+```python
+>>> from mortgagepy.compare import compare_interest_only_rates
+>>> compare_interest_only_rates(
+        mortgage=130_500, interest_rates=[1, 2]
+    )
+{1: 108.33, 2: 216.67}
 ```
 
 ## Examples - mortgage
