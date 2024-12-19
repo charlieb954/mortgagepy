@@ -14,7 +14,7 @@ the following command:
 ```bash
 pip install uv
 uv venv
-. .venv/bin/activate
+source .venv/bin/activate
 uv pip install .[dev] # to include the developer dependencies
 uv pip install .'[dev]' # for mac
 ```
@@ -29,6 +29,7 @@ pip install git+https://github.com/charlieb954/mortgagepy.git
 ## Examples - calculator
 
 Calculate the monthly repayment for a capital payment mortgage.
+
 ```python
 >>> from mortgagepy.calculator import monthly_capital_repayment
 >>> monthly_capital_repayment(
@@ -38,6 +39,7 @@ Calculate the monthly repayment for a capital payment mortgage.
 ```
 
 Work out the total cost of a mortgage.
+
 ```python
 >>> from mortgagepy.calculator import total_cost_of_mortgage
 >>> total_cost_of_mortgage(
@@ -47,6 +49,7 @@ Work out the total cost of a mortgage.
 ```
 
 Calculate repayments for an interest only mortgage.
+
 ```python
 >>> from mortgagepy.calculator import monthly_interest_only
 >>> monthly_interest_only(
@@ -56,6 +59,7 @@ Calculate repayments for an interest only mortgage.
 ```
 
 Calculate the loan-to-value as a percentage given a deposit and property value.
+
 ```python
 >>> from mortgagepy.calculator import ltv
 >>> ltv(
@@ -65,6 +69,7 @@ Calculate the loan-to-value as a percentage given a deposit and property value.
 ```
 
 Calculate the monthly interest to be paid on a mortgage.
+
 ```python
 >>> from mortgagepy.calculator import monthly_interest
 
@@ -77,15 +82,17 @@ Calculate the monthly interest to be paid on a mortgage.
 ## Examples - compare
 
 Compare the cost of two interest rates for a capital repayment mortgage.
+
 ```python
->>> from mortgagepy.compare import compare_repayment_interest_rates
->>> compare_repayment_interest_rates(
+>>> from mortgagepy.compare import compare_capital_repayment_rates
+>>> compare_capital_repayment_rates(
         mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300
     )
 {1: 491.82, 2: 553.13}
 ```
 
 Compare the cost of two interest rates for an interest only mortgage.
+
 ```python
 >>> from mortgagepy.compare import compare_interest_only_rates
 >>> compare_interest_only_rates(
@@ -98,6 +105,7 @@ Compare the cost of two interest rates for an interest only mortgage.
 
 Create a mortgage object and get important information such as loan-to-value and
 monthly repayments.
+
 ```python
 >>> from mortgagepy import CapitalRepaymentMortgage
 
