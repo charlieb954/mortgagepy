@@ -17,6 +17,7 @@ requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = [
+    "pytest-cov>=6.0.0",
     "pytest>=8.3.3",
     "ruff>=0.7.0",
     "tox>=4.23.0",
