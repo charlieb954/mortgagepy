@@ -1,6 +1,6 @@
 # How to test mortgagepy
 
-`mortgagepy` uses `pytest`, `coverage` and `tox` for it's testing. 
+`mortgagepy` uses `pytest`, `pytest-cov` and `tox` for it's testing.
 
 It is recommended to use a virtual environment before running any tests. This
 library uses `uv` to manage this and the following commands from the root of the
@@ -12,11 +12,12 @@ pip install uv
 
 # create and activate a virtual environment
 uv venv
-. .venv/bin/activate
-
-# install tox in the virtual environment
-uv pip install tox
+source .venv/bin/activate
+uv sync --extra dev
 
 # run tox
-tox
+python -m tox
+
+# or run pytest
+python -m pytest --cov
 ```
