@@ -1,3 +1,5 @@
+"""pytest tests for the mortgagepy.compare module."""
+
 import pytest
 
 from mortgagepy.compare import (
@@ -9,10 +11,12 @@ from mortgagepy.exceptions import IncorrectType
 
 @pytest.fixture
 def mortgage() -> int:
+    """fixture for mortgage amount."""
     return 130_500
 
 
 def test_compare_capital_repayments_repayment_interest_rates(mortgage: int):
+    """check if the capital repayment rates are compared correctly"""
     with pytest.raises(IncorrectType):
         compare_capital_repayment_rates(
             mortgage=mortgage, interest_rates=1, mortgage_length_months=300
@@ -27,10 +31,13 @@ def test_compare_capital_repayments_repayment_interest_rates(mortgage: int):
 
 
 def test_compare_interest_only_rates(mortgage: int):
+    """check if the interest only rates are compared correctly"""
     with pytest.raises(IncorrectType):
         compare_interest_only_rates(mortgage=mortgage, interest_rates=1)
 
-    assert compare_interest_only_rates(mortgage=mortgage, interest_rates=[1, 2]) == {
+    assert compare_interest_only_rates(
+        mortgage=mortgage, interest_rates=[1, 2]
+    ) == {
         1: 108.75,
         2: 217.50,
     }
