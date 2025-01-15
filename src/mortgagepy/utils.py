@@ -1,9 +1,13 @@
+"""Utility functions for the mortgagepy package."""
+
 from datetime import datetime
 
 from dateutil import relativedelta
 
 
-def mortgage_term_remaining(start_date: datetime, end_date: datetime) -> relativedelta:
+def mortgage_term_remaining(
+    start_date: datetime, end_date: datetime
+) -> relativedelta:
     """Given two dates, work out the difference in years, months and days.
 
     Args:

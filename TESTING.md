@@ -13,11 +13,11 @@ pip install uv
 # create and activate a virtual environment
 uv venv
 source .venv/bin/activate
-uv sync --extra dev
+uv sync
 
 # run tox
-python -m tox
+tox
 
 # or run pytest
-python -m pytest --cov
+pytest
 ```

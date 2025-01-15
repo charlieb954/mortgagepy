@@ -1,4 +1,9 @@
-from .calculator import monthly_capital_repayment, monthly_interest_only_repayment
+"""Mortgage comparisons module for mortgagepy package."""
+
+from .calculator import (
+    monthly_capital_repayment,
+    monthly_interest_only_repayment,
+)
 from .exceptions import IncorrectType
 
 

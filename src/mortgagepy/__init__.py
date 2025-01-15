@@ -1,5 +1,11 @@
+"""mortgagepy - A Python package for mortgage calculations."""
+
 from . import calculator, compare, exceptions, utils
-from .mortgage import CapitalRepaymentMortgage, InterestOnlyMortgage, MortgageBase
+from .mortgage import (
+    CapitalRepaymentMortgage,
+    InterestOnlyMortgage,
+    MortgageBase,
+)
 
 __all__ = [
     "IncorrectType",
