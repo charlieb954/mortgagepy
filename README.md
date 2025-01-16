@@ -6,6 +6,10 @@
 **mortgagepy** is a python library used to work out common mortgage calculations
 including captial repayments, total cost of ownership and single month interest.
 
+**NOTE: This repository is still in development and the primary purpose is to
+understand good python packaging practices. The maths is not guaranteed,
+any contributions would be greatly appreciated!**
+
 ## Installation
 
 To install `mortgagepy` use the following command:
