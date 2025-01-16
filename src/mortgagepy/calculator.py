@@ -62,7 +62,7 @@ def total_cost_of_mortgage(
         mortgage, interest_rate, mortgage_length_months
     )
 
-    total_cost = monthly_repayment * mortgage_length_months
+    total_cost = round(monthly_repayment * mortgage_length_months, 2)
 
     return total_cost
 
@@ -185,17 +185,18 @@ def capital_overpayment(
         # Apply lump sum payment if it's the correct month
         if months_to_repay == lump_sum_payment_month:
             remaining_balance -= lump_sum_payment
+            lump_sum_payment = 0
             if remaining_balance < 0:
-                remaining_balance = 0
                 break
 
         interest = monthly_interest(
             balance_at_previous_month=remaining_balance,
             interest_rate=interest_rate,
-            month=1,  # for ease assumes every month is 31 days
+            month=month,
+            year=year
         )
-        total_interest_paid += interest
 
+        total_interest_paid += interest
         total_payment = standard_payment + monthly_overpayment
 
         if remaining_balance < total_payment:
@@ -215,8 +216,7 @@ def capital_overpayment(
     time_saved = mortgage_length_months - months_to_repay
 
     return {
-        "months_to_repay": months_to_repay,
-        "time_saved_months": time_saved,
-        "total_interest_paid": round(total_interest_paid, 2),
-        "final_balance": round(remaining_balance, 2),
+        "time to repay (months)": months_to_repay,
+        "time saved (months)": time_saved,
+        "total interest paid (%)": round(total_interest_paid, 2),
     }
