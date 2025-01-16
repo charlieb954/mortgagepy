@@ -2,6 +2,8 @@
 
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![Actions status](https://github.com/charlieb954/mortgagepy/actions/workflows/ci.yml/badge.svg)](https://github.com/charlieb954/mortgagepy/actions)
+<!-- ![PyPI version](https://img.shields.io/pypi/v/mortgagepy.svg) -->
 
 **mortgagepy** is a python library used to work out common mortgage calculations
 including captial repayments, total cost of ownership and single month interest.
@@ -52,10 +54,10 @@ Calculate overpayment impact of the mortgage.
 ```python
 >>> my_mortgage.overpayment_projection(monthly_overpayment=100)
 
-{'months_to_repay': 264,
- 'time_saved_months': 36.0,
- 'total_interest_paid': 45229.55,
- 'final_balance': 0.0}
+{'time to repay (months)': 263,
+ 'time saved (months)': 37.0,
+ 'total interest paid (%)': 23811.59,
+ 'interest saved (£)': 3617.41}
 ```
 
 Access individual attributes such as monthly repayments or LTV.
@@ -137,10 +139,9 @@ Calulate the time saved by overpaying on your mortgage.
         mortgage=200000, interest_rate=3.5, mortgage_length_months=300, monthly_overpayment=100
     )
 
-{'months_to_repay': 262,
- 'time_saved_months': 38,
- 'total_interest_paid': 87992.71,
- 'final_balance': 0.0}
+{'time to repay (months)": 262,
+ 'time saved (months)': 38,
+ 'total interest paid (%)': 87992.71}
 ```
 
 ## Examples - compare
