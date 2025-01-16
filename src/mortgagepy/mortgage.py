@@ -3,6 +3,7 @@
 from functools import cache
 
 from .calculator import (
+    capital_overpayment,
     ltv,
     monthly_capital_repayment,
     monthly_interest_only_repayment,
@@ -125,6 +126,32 @@ class CapitalRepaymentMortgage(MortgageBase):
         MortgageBase (MortgageBase): Base class for mortgage types.
     """
 
+    def summarise(self, printed: bool = False) -> dict:
+        """Summarise the mortgage object.
+
+        Args:
+            printed (bool, optional): printed summary and no return.
+                Defaults to False.
+
+        Returns:
+            dict: dictionary of mortgage summary.
+        """
+        summary_dict = {
+            "property value (£)": self.property_value,
+            "mortgage (£)": self.mortgage,
+            "loan to value (%)": self.ltv(),
+            "monthly repayment (£)": self.monthly_repayment(),
+            "term (months)": int(self.term_months),
+            "interest rate (%)": self.interest_rate,
+            "interest paid (£)": self.mortgage_total_cost() - self.mortgage,
+            "total cost (£)": self.mortgage_total_cost(),
+        }
+        if printed:
+            for key, value in summary_dict.items():
+                print(f"{key:<25}: {value}")
+        else:
+            return summary_dict
+
     @cache
     def monthly_repayment(self) -> float:
         """Calculates the monthly repayment for a capital repayment mortgage.
@@ -149,6 +176,33 @@ class CapitalRepaymentMortgage(MortgageBase):
             mortgage=self.mortgage,
             interest_rate=self.interest_rate,
             mortgage_length_months=self.term_months,
+        )
+
+    def overpayment_projection(
+        self,
+        monthly_overpayment: float = 0.0,
+        lump_sum_payment: float = 0.0,
+        lump_sum_payment_month: int = 1,
+    ) -> dict:
+        """Projecrt the impact of overpayments on the mortgage.
+
+        Args:
+            monthly_overpayment (float, optional): amount to overpay every
+                month. Defaults to 0.0.
+            lump_sum (float, optional): lump sum to overpay. Defaults to 0.0.
+            lump_sum_payment_month (int, optional): the month at which to
+                overpay the lump sum. Defaults to 1 (january).
+
+        Returns:
+            dict: A dictionary containing the impact details.
+        """
+        return capital_overpayment(
+            mortgage=self.mortgage,
+            interest_rate=self.interest_rate,
+            mortgage_length_months=self.term_months,
+            monthly_overpayment=monthly_overpayment,
+            lump_sum_payment=lump_sum_payment,
+            lump_sum_payment_month=lump_sum_payment_month,
         )
 
 
