@@ -143,7 +143,7 @@ class CapitalRepaymentMortgage(MortgageBase):
             "monthly repayment (£)": self.monthly_repayment(),
             "term (months)": int(self.term_months),
             "interest rate (%)": self.interest_rate,
-            "interest paid (£)": self.mortgage_total_cost() - self.mortgage,
+            "interest paid (£)": self.interest_paid(),
             "total cost (£)": self.mortgage_total_cost(),
         }
         if printed:
@@ -178,6 +178,15 @@ class CapitalRepaymentMortgage(MortgageBase):
             mortgage_length_months=self.term_months,
         )
 
+    @cache
+    def interest_paid(self) -> float:
+        """Calculates the total interest paid on the mortgage.
+
+        Returns:
+            float: The total interest paid on the mortgage.
+        """
+        return round(self.mortgage_total_cost() - self.mortgage, 2)
+
     def overpayment_projection(
         self,
         monthly_overpayment: float = 0.0,
@@ -196,7 +205,7 @@ class CapitalRepaymentMortgage(MortgageBase):
         Returns:
             dict: A dictionary containing the impact details.
         """
-        return capital_overpayment(
+        overpayment_dict = capital_overpayment(
             mortgage=self.mortgage,
             interest_rate=self.interest_rate,
             mortgage_length_months=self.term_months,
@@ -204,6 +213,12 @@ class CapitalRepaymentMortgage(MortgageBase):
             lump_sum_payment=lump_sum_payment,
             lump_sum_payment_month=lump_sum_payment_month,
         )
+
+        overpayment_dict["interest saved (£)"] = (
+            self.interest_paid() - overpayment_dict["total interest paid (%)"]
+        )
+
+        return overpayment_dict
 
 
 class InterestOnlyMortgage(MortgageBase):
