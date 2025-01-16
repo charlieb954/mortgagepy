@@ -117,10 +117,10 @@ def monthly_interest(
         balance_at_previous_month (float): outstanding mortgage at previous
             month.
         interest_rate (float): interest rate as a percentage.
-        month (Optional[int]): month of the year to calculate interest,
+        month (int, optional): month of the year to calculate interest,
             required for daily interest calculation. Default is 1 which assumes
             31 days in the month.
-        year (Optional[int]): year to calculate interest, required to account
+        year (int, optional): year to calculate interest, required to account
             for leap years. Default is 2023 which assumes a non-leap year.
 
     Returns:
@@ -192,7 +192,7 @@ def capital_overpayment(
         interest = monthly_interest(
             balance_at_previous_month=remaining_balance,
             interest_rate=interest_rate,
-            month=1 # for ease assumes every month is 31 days
+            month=1,  # for ease assumes every month is 31 days
         )
         total_interest_paid += interest
 
