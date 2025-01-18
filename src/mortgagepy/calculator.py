@@ -193,7 +193,7 @@ def capital_overpayment(
             balance_at_previous_month=remaining_balance,
             interest_rate=interest_rate,
             month=month,
-            year=year
+            year=year,
         )
 
         total_interest_paid += interest
