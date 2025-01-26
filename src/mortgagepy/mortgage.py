@@ -2,6 +2,10 @@
 
 from functools import cache
 
+from rich import box
+from rich.console import Console
+from rich.table import Table
+
 from .calculator import (
     capital_overpayment,
     ltv,
@@ -137,18 +141,22 @@ class CapitalRepaymentMortgage(MortgageBase):
             dict: dictionary of mortgage summary.
         """
         summary_dict = {
-            "property value (£)": self.property_value,
-            "mortgage (£)": self.mortgage,
-            "loan to value (%)": self.ltv(),
-            "monthly repayment (£)": self.monthly_repayment(),
+            "property value": f"£{self.property_value:,}",
+            "mortgage": f"£{self.mortgage:,}",
+            "loan to value": f"{self.ltv()}%",
+            "monthly repayment": f"£{self.monthly_repayment():,}",
             "term (months)": int(self.term_months),
-            "interest rate (%)": self.interest_rate,
-            "interest paid (£)": self.interest_paid(),
-            "total cost (£)": self.mortgage_total_cost(),
+            "interest rate": f"{self.interest_rate}%",
+            "interest paid": f"£{self.interest_paid()}",
+            "total cost": f"£{self.mortgage_total_cost():,}",
         }
         if printed:
-            for key, value in summary_dict.items():
-                print(f"{key:<25}: {value}")
+            title = "Capital Repayment Mortgage Summary"
+            table = Table(title=title, header_style="bold", box=box.HEAVY)
+            for key in summary_dict:
+                table.add_column(key.title(), vertical="top")
+            table.add_row(*map(str, summary_dict.values()))
+            Console().print(table)
         else:
             return summary_dict
 
