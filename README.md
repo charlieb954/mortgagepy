@@ -38,14 +38,13 @@ Get a summary of the mortgage.
 ```python
 >>> my_mortgage.summarise(printed=True)
 
-property value (£)       : 280000.0
-mortgage (£)             : 210000.0
-loan to value (%)        : 75
-monthly repayment (£)    : 869.79
-term (months)            : 300
-interest rate (%)        : 1.8
-interest paid (£)        : 50937.0
-total cost (£)           : 260937.0
+                                        Capital Repayment Mortgage Summary                                         
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Property     ┃            ┃ Loan To      ┃ Monthly     ┃ Term         ┃ Interest    ┃ Interest     ┃            ┃
+┃ Value        ┃ Mortgage   ┃ Value        ┃ Repayment   ┃ (Months)     ┃ Rate        ┃ Paid         ┃ Total Cost ┃
+┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━┫
+┃ £280,000.0   ┃ £210,000.0 ┃ 75%          ┃ £869.79     ┃ 300          ┃ 1.8%        ┃ £50937.0     ┃ £260,937.0 ┃
+┗━━━━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━┛
 ```
 
 Calculate overpayment impact of the mortgage.
@@ -143,7 +142,7 @@ Calulate the time saved by overpaying on your mortgage.
 {
     'time to repay (months)": 262,
     'time saved (months)': 38,
-    'total interest paid (%)': 87992.71
+    'total interest paid (£)': 87992.71
 }
 ```
 
