@@ -222,9 +222,11 @@ class CapitalRepaymentMortgage(MortgageBase):
             lump_sum_payment_month=lump_sum_payment_month,
         )
 
-        overpayment_dict["interest saved (£)"] = (
-            self.interest_paid() - overpayment_dict["total interest paid (%)"]
+        interest_saved = (
+            self.interest_paid() - overpayment_dict["total interest paid (£)"]
         )
+
+        overpayment_dict["interest saved (£)"] = round(interest_saved, 2)
 
         return overpayment_dict
 
@@ -235,6 +237,35 @@ class InterestOnlyMortgage(MortgageBase):
     Args:
         MortgageBase (MortgageBase): Base class for mortgage types.
     """
+
+    def summarise(self, printed: bool = False) -> dict:
+        """Summarise the mortgage object.
+
+        Args:
+            printed (bool, optional): printed summary and no return.
+                Defaults to False.
+
+        Returns:
+            dict: dictionary of mortgage summary.
+        """
+        summary_dict = {
+            "property value": f"£{self.property_value:,}",
+            "mortgage": f"£{self.mortgage:,}",
+            "loan to value": f"{self.ltv()}%",
+            "monthly repayment": f"£{self.monthly_repayment():,}",
+            "term (months)": int(self.term_months),
+            "interest rate": f"{self.interest_rate}%",
+            "total cost": f"£{self.mortgage_total_cost():,}",
+        }
+        if printed:
+            title = "Capital Repayment Mortgage Summary"
+            table = Table(title=title, header_style="bold", box=box.HEAVY)
+            for key in summary_dict:
+                table.add_column(key.title(), vertical="top")
+            table.add_row(*map(str, summary_dict.values()))
+            Console().print(table)
+        else:
+            return summary_dict
 
     @cache
     def monthly_repayment(self) -> float:

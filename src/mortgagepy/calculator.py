@@ -218,5 +218,5 @@ def capital_overpayment(
     return {
         "time to repay (months)": months_to_repay,
         "time saved (months)": time_saved,
-        "total interest paid (%)": round(total_interest_paid, 2),
+        "total interest paid (£)": round(total_interest_paid, 2),
     }
