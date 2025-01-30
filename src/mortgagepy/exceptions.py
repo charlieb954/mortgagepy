@@ -10,7 +10,7 @@ class IncorrectType(Exception):
 
     def __init__(
         self, message: Optional[str] = None, errors: Optional[str] = None
-    ):
+    ) -> None:
         """Initializes the IncorrectType exception.
 
         Args:

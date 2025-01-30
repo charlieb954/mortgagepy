@@ -15,7 +15,9 @@ def mortgage() -> int:
     return 130_500
 
 
-def test_compare_capital_repayments_repayment_interest_rates(mortgage: int):
+def test_compare_capital_repayments_repayment_interest_rates(
+    mortgage: int,
+) -> None:
     """check if the capital repayment rates are compared correctly"""
     with pytest.raises(IncorrectType):
         compare_capital_repayment_rates(
@@ -30,7 +32,7 @@ def test_compare_capital_repayments_repayment_interest_rates(mortgage: int):
     }
 
 
-def test_compare_interest_only_rates(mortgage: int):
+def test_compare_interest_only_rates(mortgage: int) -> None:
     """check if the interest only rates are compared correctly"""
     with pytest.raises(IncorrectType):
         compare_interest_only_rates(mortgage=mortgage, interest_rates=1)

@@ -49,11 +49,15 @@ quote-style = "double"
 
 [tool.ruff.lint]
 select = [
-    "D1",  # pydocstyle
+    "D1",  # docstring
     "E",   # pycodestyle
     "ERA", # commented out code
     "I",   # isort
     "W",   # pycodestyle
+    "ANN", # missing type annotation
+]
+ignore = [
+    "ANN101",  # missing type annotation for self
 ]
 
 [tool.ruff.lint.pydocstyle]
