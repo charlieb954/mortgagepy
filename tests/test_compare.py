@@ -26,10 +26,10 @@ def test_compare_capital_repayments_repayment_interest_rates(
 
     assert compare_capital_repayment_rates(
         mortgage=mortgage, interest_rates=[1, 2], mortgage_length_months=300
-    ) == {
-        0: {"interest_rate": 1, "repayment": 491.82},
-        1: {"interest_rate": 2, "repayment": 553.13},
-    }
+    ) == [
+        {"interest_rate": 1, "repayment": 491.82},
+        {"interest_rate": 2, "repayment": 553.13},
+    ]
 
 
 def test_compare_interest_only_rates(mortgage: int) -> None:
@@ -39,7 +39,7 @@ def test_compare_interest_only_rates(mortgage: int) -> None:
 
     assert compare_interest_only_rates(
         mortgage=mortgage, interest_rates=[1, 2]
-    ) == {
-        0: {"interest_rate": 1, "repayment": 108.75},
-        1: {"interest_rate": 2, "repayment": 217.50},
-    }
+    ) == [
+        {"interest_rate": 1, "repayment": 108.75},
+        {"interest_rate": 2, "repayment": 217.50},
+    ]
