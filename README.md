@@ -39,12 +39,13 @@ Get a summary of the mortgage.
 >>> my_mortgage.summarise(printed=True)
 
                                         Capital Repayment Mortgage Summary                                         
-┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-┃ Property     ┃            ┃ Loan To      ┃ Monthly     ┃ Term         ┃ Interest    ┃ Interest     ┃            ┃
-┃ Value        ┃ Mortgage   ┃ Value        ┃ Repayment   ┃ (Months)     ┃ Rate        ┃ Paid         ┃ Total Cost ┃
-┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━┫
-┃ £280,000.0   ┃ £210,000.0 ┃ 75%          ┃ £869.79     ┃ 300          ┃ 1.8%        ┃ £50937.0     ┃ £260,937.0 ┃
-┗━━━━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+┃             ┃             ┃             ┃ Monthly     ┃              ┃             ┃              ┃             ┃
+┃ Property    ┃ Mortgage    ┃ Loan To     ┃ Repayment   ┃ Term         ┃ Interest    ┃ Interest     ┃ Total Cost  ┃
+┃ Value (£)   ┃ (£)         ┃ Value (%)   ┃ (£)         ┃ (Months)     ┃ Rate (%)    ┃ Paid (£)     ┃ (£)         ┃
+┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫
+┃ 280000.0    ┃ 210000.0    ┃ 75          ┃ 869.79      ┃ 300.0        ┃ 1.8         ┃ 50937.0      ┃ 260937.0    ┃
+┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 ```
 
 Calculate overpayment impact of the mortgage.
@@ -156,10 +157,10 @@ Compare the cost of two interest rates for a capital repayment mortgage.
         mortgage=130_500, interest_rates=[1, 2], mortgage_length_months=300
     )
 
-{
-    0: {'interest_rate': 1, 'repayment': 491.82},
-    1: {'interest_rate': 2, 'repayment': 553.13}
-}
+[
+    {'interest_rate': 1, 'repayment': 491.82},
+    {'interest_rate': 2, 'repayment': 553.13}
+]
 ```
 
 Compare the cost of two interest rates for an interest only mortgage.
@@ -170,8 +171,8 @@ Compare the cost of two interest rates for an interest only mortgage.
         mortgage=130_500, interest_rates=[1, 2]
     )
 
-{
-    0: {'interest_rate': 1, 'repayment': 108.75},
-    1: {'interest_rate': 2, 'repayment': 217.5}
-}
+[
+    {'interest_rate': 1, 'repayment': 108.75},
+    {'interest_rate': 2, 'repayment': 217.5}
+]
 ```
