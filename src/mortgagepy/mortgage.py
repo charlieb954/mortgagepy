@@ -25,7 +25,7 @@ class MortgageBase:
         mortgage: float | int,
         term_months: float | int,
         interest_rate: float | int,
-    ):
+    ) -> None:
         """Initialises the MortgageBase class.
 
         Args:
@@ -53,7 +53,7 @@ class MortgageBase:
         """Property value.
 
         Returns:
-            float: Property value.
+            (float): Property value.
         """
         return self._property_value
 
@@ -69,7 +69,7 @@ class MortgageBase:
         """Mortgage amount.
 
         Returns:
-            float: Mortgage amount.
+            (float): Mortgage amount.
         """
         return self._mortgage
 
@@ -85,7 +85,7 @@ class MortgageBase:
         """Term in months.
 
         Returns:
-            float: Term in months.
+            (float): Term in months.
         """
         return self._term_months
 
@@ -101,7 +101,7 @@ class MortgageBase:
         """Interest rate.
 
         Returns:
-            float: Interest rate.
+            (float): Interest rate.
         """
         return self._interest_rate
 
@@ -117,7 +117,7 @@ class MortgageBase:
         """Calculates the loan to value ratio.
 
         Returns:
-            int: The loan to value ratio.
+            (int): The loan to value ratio.
         """
         deposit = self.property_value - self.mortgage
         return ltv(property_value=self.property_value, deposit=deposit)
@@ -141,14 +141,14 @@ class CapitalRepaymentMortgage(MortgageBase):
             dict: dictionary of mortgage summary.
         """
         summary_dict = {
-            "property value": f"£{self.property_value:,}",
-            "mortgage": f"£{self.mortgage:,}",
-            "loan to value": f"{self.ltv()}%",
-            "monthly repayment": f"£{self.monthly_repayment():,}",
-            "term (months)": int(self.term_months),
-            "interest rate": f"{self.interest_rate}%",
-            "interest paid": f"£{self.interest_paid()}",
-            "total cost": f"£{self.mortgage_total_cost():,}",
+            "property value (£)": self.property_value,
+            "mortgage (£)": self.mortgage,
+            "loan to value (%)": self.ltv(),
+            "monthly repayment (£)": self.monthly_repayment(),
+            "term (months)": self.term_months,
+            "interest rate (%)": self.interest_rate,
+            "interest paid (£)": self.interest_paid(),
+            "total cost (£)": self.mortgage_total_cost(),
         }
         if printed:
             title = "Capital Repayment Mortgage Summary"
@@ -165,7 +165,7 @@ class CapitalRepaymentMortgage(MortgageBase):
         """Calculates the monthly repayment for a capital repayment mortgage.
 
         Returns:
-            float: The monthly repayment for a capital repayment mortgage.
+            (float): The monthly repayment for a capital repayment mortgage.
         """
         return monthly_capital_repayment(
             mortgage=self.mortgage,
@@ -178,7 +178,7 @@ class CapitalRepaymentMortgage(MortgageBase):
         """Calculates the total cost of the mortgage.
 
         Returns:
-            float: The total cost of the mortgage.
+            (float): The total cost of the mortgage.
         """
         return total_cost_of_mortgage(
             mortgage=self.mortgage,
@@ -191,7 +191,7 @@ class CapitalRepaymentMortgage(MortgageBase):
         """Calculates the total interest paid on the mortgage.
 
         Returns:
-            float: The total interest paid on the mortgage.
+            (float): The total interest paid on the mortgage.
         """
         return round(self.mortgage_total_cost() - self.mortgage, 2)
 
@@ -211,7 +211,7 @@ class CapitalRepaymentMortgage(MortgageBase):
                 overpay the lump sum. Defaults to 1 (january).
 
         Returns:
-            dict: A dictionary containing the impact details.
+            (dict): A dictionary containing the impact details.
         """
         overpayment_dict = capital_overpayment(
             mortgage=self.mortgage,
@@ -246,16 +246,16 @@ class InterestOnlyMortgage(MortgageBase):
                 Defaults to False.
 
         Returns:
-            dict: dictionary of mortgage summary.
+            (dict): dictionary of mortgage summary.
         """
         summary_dict = {
-            "property value": f"£{self.property_value:,}",
-            "mortgage": f"£{self.mortgage:,}",
-            "loan to value": f"{self.ltv()}%",
-            "monthly repayment": f"£{self.monthly_repayment():,}",
-            "term (months)": int(self.term_months),
-            "interest rate": f"{self.interest_rate}%",
-            "total cost": f"£{self.mortgage_total_cost():,}",
+            "property value (£)": self.property_value,
+            "mortgage (£)": self.mortgage,
+            "loan to value (%)": self.ltv(),
+            "monthly repayment (£)": self.monthly_repayment(),
+            "term (months)": self.term_months,
+            "interest rate (%)": self.interest_rate,
+            "total cost (£)": self.mortgage_total_cost(),
         }
         if printed:
             title = "Capital Repayment Mortgage Summary"

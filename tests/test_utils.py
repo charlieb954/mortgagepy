@@ -5,7 +5,7 @@ from datetime import datetime
 from mortgagepy.utils import mortgage_term_remaining
 
 
-def test_mortgage_term_remaining():
+def test_mortgage_term_remaining() -> None:
     """check if mortgage_term_remaining returns the correct number of years."""
     assert (
         mortgage_term_remaining(
