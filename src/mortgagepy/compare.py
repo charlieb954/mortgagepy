@@ -19,21 +19,21 @@ def compare_interest_only_rates(
         interest_rates (list): interest rates to compare.
 
     Returns:
-        (dict): all the interest rate and monthly repayment values.
+        (list): all the interest rate and monthly repayment values.
     """
     if not isinstance(interest_rates, list):
         raise IncorrectType("Please ensure you pass a list of interest rates.")
 
-    repayments = dict()
+    repayments = list()
 
-    for idx, interest_rate in enumerate(interest_rates):
-        repayments[idx] = {
+    for interest_rate in interest_rates:
+        repayments.append({
             "interest_rate": interest_rate,
             "repayment": monthly_interest_only_repayment(
                 mortgage=mortgage,
                 interest_rate=interest_rate,
             ),
-        }
+        })
 
     return repayments
 
@@ -53,21 +53,21 @@ def compare_capital_repayment_rates(
             the mortgage.
 
     Returns:
-        (dict): all the interest rate and monthly repayment values.
+        (list): all the interest rate and monthly repayment values.
     """
     if not isinstance(interest_rates, list):
         raise IncorrectType("Please ensure you pass a list of interest rates.")
 
-    repayments = dict()
+    repayments = list()
 
-    for idx, interest_rate in enumerate(interest_rates):
-        repayments[idx] = {
+    for interest_rate in interest_rates:
+        repayments.append( {
             "interest_rate": interest_rate,
             "repayment": monthly_capital_repayment(
                 mortgage=mortgage,
                 interest_rate=interest_rate,
                 mortgage_length_months=mortgage_length_months,
             ),
-        }
+        })
 
     return repayments
