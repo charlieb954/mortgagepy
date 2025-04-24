@@ -11,7 +11,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
-          version: "0.5.20"
+          version: "0.6.16"
 
       - name: "Set up Python"
         uses: actions/setup-python@v5
@@ -28,4 +28,4 @@ jobs:
         run: uv run ruff format --diff
 
       - name: Run tests
-        run: uv run pytest --cov-report term --cov=mortgagepy
+        run: uv run pytest --cov-report=term --cov=mortgagepy
