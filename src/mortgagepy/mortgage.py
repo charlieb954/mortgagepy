@@ -165,7 +165,7 @@ class CapitalRepaymentMortgage(MortgageBase):
         if printed:
             table = self._create_summary_table(
                 summary_dict, "Capital Repayment Mortgage Summary"
-        )
+            )
             Console().print(table)
         else:
             return summary_dict
@@ -271,7 +271,7 @@ class InterestOnlyMortgage(MortgageBase):
         if printed:
             table = self._create_summary_table(
                 summary_dict, "Interest Only Mortgage Summary"
-        )
+            )
             Console().print(table)
         else:
             return summary_dict
