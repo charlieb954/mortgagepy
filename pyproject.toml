@@ -56,3 +56,4 @@ ignore = [
 convention = "google"
 
 [tool.setuptools_scm]
+# used to infer the version from the git tag
