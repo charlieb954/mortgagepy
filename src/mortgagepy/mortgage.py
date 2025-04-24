@@ -37,16 +37,28 @@ class MortgageBase:
         Raises:
             IncorrectType: If any of the inputs are not of type float or int.
         """
-        if not all(
-            isinstance(item, (float, int))
-            for item in [property_value, mortgage, term_months, interest_rate]
-        ):
-            raise IncorrectType()
+        for name, value in {
+            "property_value": property_value,
+            "mortgage": mortgage,
+            "term_months": term_months,
+            "interest_rate": interest_rate,
+        }.items():
+            if not isinstance(value, (float, int)):
+                raise IncorrectType(
+                    f"{name} must be float or int, got {type(value).__name__}"
+                )
 
         self._property_value = float(property_value)
         self._mortgage = float(mortgage)
         self._term_months = float(term_months)
         self._interest_rate = float(interest_rate)
+
+    def _create_summary_table(self, summary_dict: dict, title: str) -> Table:
+        table = Table(title=title, header_style="bold", box=box.HEAVY)
+        for key in summary_dict:
+            table.add_column(key.title(), vertical="top")
+        table.add_row(*map(str, summary_dict.values()))
+        return table
 
     @property
     def property_value(self) -> float:
@@ -76,9 +88,9 @@ class MortgageBase:
     @mortgage.setter
     def mortgage(self, new_mortgage: float | int) -> None:
         if new_mortgage > 0 and isinstance(new_mortgage, (float, int)):
-            self._new_mortgage = float(new_mortgage)
+            self._mortgage = float(new_mortgage)
         else:
-            raise IncorrectType()
+            raise IncorrectType("Mortgage must be positive float or int.")
 
     @property
     def term_months(self) -> float:
@@ -151,11 +163,9 @@ class CapitalRepaymentMortgage(MortgageBase):
             "total cost (£)": self.mortgage_total_cost(),
         }
         if printed:
-            title = "Capital Repayment Mortgage Summary"
-            table = Table(title=title, header_style="bold", box=box.HEAVY)
-            for key in summary_dict:
-                table.add_column(key.title(), vertical="top")
-            table.add_row(*map(str, summary_dict.values()))
+            table = self._create_summary_table(
+                summary_dict, "Capital Repayment Mortgage Summary"
+        )
             Console().print(table)
         else:
             return summary_dict
@@ -201,14 +211,15 @@ class CapitalRepaymentMortgage(MortgageBase):
         lump_sum_payment: float = 0.0,
         lump_sum_payment_month: int = 1,
     ) -> dict:
-        """Projecrt the impact of overpayments on the mortgage.
+        """Project the impact of overpayments on the mortgage.
 
         Args:
             monthly_overpayment (float, optional): amount to overpay every
                 month. Defaults to 0.0.
             lump_sum (float, optional): lump sum to overpay. Defaults to 0.0.
-            lump_sum_payment_month (int, optional): the month at which to
-                overpay the lump sum. Defaults to 1 (january).
+            lump_sum_payment_month (int, optional): The month (1-based index)
+                during the mortgage term to apply the lump sum payment.
+                Defaults to 1.
 
         Returns:
             (dict): A dictionary containing the impact details.
@@ -258,11 +269,9 @@ class InterestOnlyMortgage(MortgageBase):
             "total cost (£)": self.mortgage_total_cost(),
         }
         if printed:
-            title = "Capital Repayment Mortgage Summary"
-            table = Table(title=title, header_style="bold", box=box.HEAVY)
-            for key in summary_dict:
-                table.add_column(key.title(), vertical="top")
-            table.add_row(*map(str, summary_dict.values()))
+            table = self._create_summary_table(
+                summary_dict, "Interest Only Mortgage Summary"
+        )
             Console().print(table)
         else:
             return summary_dict
