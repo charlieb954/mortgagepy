@@ -1,23 +1,20 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "mortgagepy"
-version = "0.1.0"
+dynamic = ["version"]
 description = "A python library to calculate mortgage payments"
 readme = "README.md"
-authors = [{ name = "Charlie"}]
-license = {file = "LICENSE"}
+authors = [{ name = "Charlie" }]
+license = { file = "LICENSE" }
 classifiers = [
     "Licence :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
 ]
 keywords = ["mortgage"]
-dependencies = [
-    "python-dateutil>=2.9.0.post0",
-    "rich>=13.9.4",
-]
+dependencies = ["python-dateutil>=2.9.0.post0", "rich>=13.9.4"]
 requires-python = ">=3.9"
 
 [dependency-groups]
@@ -29,13 +26,8 @@ dev = [
     "ipykernel>=6.29.5",
 ]
 
-[project.optional-dependencies]
-docs = []
-
 [tool.pytest.ini_options]
-pythonpath = [
-    ".", "src",
-]
+pythonpath = [".", "src"]
 
 [tool.ruff]
 exclude = ["*.ipynb"]
@@ -57,8 +49,10 @@ select = [
     "ANN", # missing type annotation
 ]
 ignore = [
-    "ANN101",  # missing type annotation for self
+    "ANN101", # missing type annotation for self
 ]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.setuptools_scm]
